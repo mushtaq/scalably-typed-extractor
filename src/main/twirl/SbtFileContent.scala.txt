@@ -15,9 +15,7 @@ lazy val std = project
   )
 
 @projects.map { case (p, deps) =>
-    @if(p != "std") {
 lazy val `@p` = project
   .enablePlugins(ScalaJSPlugin)
   .dependsOn(@deps.map(x => s"`$x`").mkString(","))
-    }
 }
