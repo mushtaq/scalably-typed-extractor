@@ -1,16 +1,18 @@
 package extractor
 
+import java.nio.file.Files
+
 import coursier._
 import coursier.util.Task.sync
+import txt.build
+import ammonite.ops._
 
 object Main {
 
-  val modules: Seq[String] = Seq(
-    "react-dom",
-    "rsocket-websocket-client"
-  )
-
   def main(args: Array[String]): Unit = {
+
+    val modules: Seq[String] = read(pwd / "project-list.txt").linesIterator.toList
+
     val resolution: Resolution = Resolve()
       .addDependencies(modules.map(dependency): _*)
       .addRepositories(Repositories.bintray("oyvindberg", "ScalablyTyped"))
@@ -20,7 +22,12 @@ object Main {
       case (x, xs) => name(x) -> xs.map(name)
     }
 
-    results.foreach(println)
+    println(build("tmt-typed", results).body)
+
+    println(ls ! pwd / "template")
+
+    println(Path(args(0)))
+
   }
 
   private def name(x: Dependency): String = x.module.name.value.stripSuffix(ScalaJsSuffix)

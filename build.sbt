@@ -1,8 +1,10 @@
-name := "scalably-typed-extraction"
+name := "scalably-typed-extractor"
 
 version := "0.1"
 
 scalaVersion := "2.13.0"
+
+enablePlugins(SbtTwirl)
 
 libraryDependencies ++= Seq(
   "com.lihaoyi" % "ammonite" % "1.7.1" cross CrossVersion.full,

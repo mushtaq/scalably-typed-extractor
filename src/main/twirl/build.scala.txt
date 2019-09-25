@@ -1,0 +1,23 @@
+@(aggregateName: String, projects: Map[String, Seq[String]])
+
+lazy val `@aggregateName` = project
+  .in(file("."))
+  .aggregate(
+    @projects.keySet.map(x => s"`$x`").mkString(",")
+  )
+
+lazy val std = project
+  .enablePlugins(ScalaJSPlugin)
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.olvind" %%% "scalablytyped-runtime" % "2.1.0"
+    )
+  )
+
+@projects.map { case (p, deps) =>
+    @if(p != "std") {
+lazy val `@p` = project
+  .enablePlugins(ScalaJSPlugin)
+  .dependsOn(@deps.map(x => s"`$x`").mkString(","))
+    }
+}
