@@ -7,6 +7,7 @@ lazy val `@aggregateName` = project
   )
 
 lazy val std = project
+  .in(file("modules/std"))
   .enablePlugins(ScalaJSPlugin)
   .settings(
     libraryDependencies ++= Seq(
@@ -16,6 +17,7 @@ lazy val std = project
 
 @projects.map { case (p, deps) =>
 lazy val `@p` = project
+  .in(file("modules/@p"))
   .enablePlugins(ScalaJSPlugin)
   .dependsOn(@deps.map(x => s"`$x`").mkString(","))
 }

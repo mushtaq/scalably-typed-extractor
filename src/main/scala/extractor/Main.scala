@@ -9,10 +9,10 @@ object Main {
 
   def main(args: Array[String]): Unit = {
 
-    val scalablyTypedPath = Path(args(0))
-    val targetPath        = Path(args(1))
+    val stRepo = Path(args(0))
+    val myRepo = Path(args(1))
 
-    val modules: Seq[String] = read(pwd / "project-list.txt").linesIterator.toList
+    val modules: Seq[String] = read(myRepo / "project-list.txt").linesIterator.toList
 
     val resolution: Resolution = Resolve()
       .addDependencies(modules.map(dependency): _*)
@@ -24,26 +24,24 @@ object Main {
     }
 
     results.foreach(println)
-    createProject(scalablyTypedPath, targetPath, results)
+    createProject(stRepo, myRepo, results)
   }
 
-  def createProject(scalablyTypedPath: Path, targetPath: Path, results: Map[String, Seq[String]]): Unit = {
-    val templatePath = targetPath / "template"
-    rm ! templatePath
+  def createProject(stRepo: Path, myRepo: Path, results: Map[String, Seq[String]]): Unit = {
+    rm ! myRepo / "modules"
+    rm ! myRepo / "build.sbt"
 
-    cp.into(pwd / "template", targetPath)
-
-    write(templatePath / "build.sbt", SbtFileContent("tmt-typed", results).body)
+    write(myRepo / "build.sbt", SbtFileContent(myRepo.baseName, results).body)
 
     val projectNames = results.keySet ++ Set("std")
 
     projectNames.foreach { p =>
-      val targetProjectPath = templatePath / p
-      mkdir ! targetProjectPath
+      val modulePath = myRepo / "modules" / p
+      mkdir ! modulePath
 
-      val sourceProjectPath = scalablyTypedPath / p.head.toString / p
-      cp.into(sourceProjectPath / "src", targetProjectPath)
-      cp.into(sourceProjectPath / "readme.md", targetProjectPath)
+      val stModule = stRepo / p.head.toString / p
+      cp.into(stModule / "src", modulePath)
+      cp.into(stModule / "readme.md", modulePath)
     }
 
   }

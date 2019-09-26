@@ -1,2 +1,0 @@
-react-dom
-rsocket-websocket-client
