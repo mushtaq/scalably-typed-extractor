@@ -3,7 +3,7 @@
 lazy val `@aggregateName` = project
   .in(file("."))
   .aggregate(
-    @projects.keySet.map(x => s"`$x`").mkString(",")
+    std, @projects.keySet.map(x => s"`$x`").mkString(",")
   )
 
 lazy val std = project

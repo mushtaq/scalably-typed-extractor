@@ -6,7 +6,7 @@ lazy val `scalably-typed-extractor` = project
   .enablePlugins(SbtTwirl, ScriptedPlugin)
   .settings(
     organization := "com.github.tmtsoftware.scalably-typed-extractor",
-    version := "0.1.3-SNAPSHOT",
+    version := "0.1.4-SNAPSHOT",
     scalaVersion := "2.12.10",
     sbtPlugin := true,
     libraryDependencies ++= Seq(
