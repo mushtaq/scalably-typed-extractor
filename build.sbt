@@ -6,12 +6,12 @@ lazy val `scalably-typed-extractor` = project
   .enablePlugins(SbtTwirl, ScriptedPlugin)
   .settings(
     organization := "com.github.tmtsoftware.scalably-typed-extractor",
-    version := "0.1.0",
+    version := "0.1.3-SNAPSHOT",
     scalaVersion := "2.12.10",
     sbtPlugin := true,
     libraryDependencies ++= Seq(
-      "com.lihaoyi"     % "ammonite"        % "1.7.1" cross CrossVersion.full,
-      "io.get-coursier" %% "coursier"       % "2.0.0-RC3-4",
+      "com.lihaoyi" % "ammonite" % "1.7.1" cross CrossVersion.full,
+      "io.get-coursier" %% "coursier" % "2.0.0-RC3-4",
       "io.get-coursier" %% "coursier-cache" % "2.0.0-RC3-4"
     ),
     scriptedLaunchOpts += ("-Dplugin.version=" + version.value),
@@ -20,5 +20,9 @@ lazy val `scalably-typed-extractor` = project
     ),
     scriptedBufferLog := false,
     publishMavenStyle := true,
-    licenses := Seq(("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")))
+    licenses := Seq(
+      ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
+    ),
+    bintrayRepository := "sbt-plugins",
+    bintrayOrganization in bintray := None
   )
