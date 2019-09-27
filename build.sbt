@@ -1,3 +1,7 @@
+lazy val `scalably-typed-extractor-root` = project
+  .in(file("."))
+  .aggregate(`scalably-typed-extractor`)
+
 lazy val `scalably-typed-extractor` = project
   .enablePlugins(SbtTwirl, ScriptedPlugin)
   .settings(
