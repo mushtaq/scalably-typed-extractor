@@ -46,11 +46,11 @@ class Extractor(stRepo: Path, myRepo: Path, modules: Seq[ModuleID], log: Logger)
 
   log.info("Done--------------------------------------------")
 
-  def name(x: Dependency): String = x.module.name.value.stripSuffix("_sjs0.6_2.12")
+  def name(x: Dependency): String = x.module.name.value.stripSuffix("_sjs0.6_2.13")
 
   lazy val exclusions: Set[(Organization, ModuleName)] = Set(
-    org"com.olvind"     -> name"scalablytyped-runtime_sjs0.6_2.12",
-    org"org.scala-js"   -> name"scalajs-library_2.12",
+    org"com.olvind"     -> name"scalablytyped-runtime_sjs0.6_2.13",
+    org"org.scala-js"   -> name"scalajs-library_2.13",
     org"org.scala-lang" -> name"scala-library"
   )
 

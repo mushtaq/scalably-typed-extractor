@@ -5,4 +5,4 @@ sys.props.get("plugin.version") match {
 }
 
 resolvers += Resolver.bintrayRepo("oyvindberg", "ScalablyTyped")
-addSbtPlugin("org.scalablytyped" % "sbt-scalablytyped" % "201909240530")
+addSbtPlugin("org.scalablytyped" % "sbt-scalablytyped" % "202002201029")
